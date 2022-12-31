@@ -10,10 +10,8 @@ function Book(title, author, pages, isRead) {
   };
 }
 
-const novel = new Book("the Hobbit", "J.R.R. Tolkien", "295 pages", "not read");
-
 function addBookToLibrary() {
-  return myLibrary.push(novel);
+  return myLibrary.push();
 }
 
 function loopThroughLibrary() {
@@ -21,7 +19,7 @@ function loopThroughLibrary() {
 
   myLibrary.forEach((e) => e.info());
 
-  const container = document.querySelector(".container");
+  const container = document.querySelector(".cardContainer");
 
   const content = document.createElement("div");
   content.classList.add("content");
@@ -31,3 +29,22 @@ function loopThroughLibrary() {
 
   myLibrary = [];
 }
+
+// Coding for modal
+const modal = document.querySelector(".modal");
+const addBookButton = document.querySelector(".modalButton");
+const closeModal = document.querySelector(".closeModal");
+
+addBookButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+closeModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
