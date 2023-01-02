@@ -1,3 +1,4 @@
+const addBookButton = document.querySelector("#addBookButton");
 let myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -14,42 +15,51 @@ function addBookToLibrary(book) {
   return myLibrary.push(book);
 }
 
-function loopThroughLibrary() {
+// Displays book info as a card
+function createCardDisplay() {
   const displayBook = myLibrary.map((book) => book.info());
 
-  const container = document.querySelector(".cardContainer");
+  const selectContainer = document.querySelector(".cardContainer");
 
   const content = document.createElement("div");
   content.classList.add("content");
 
-  content.textContent = displayBook[0].toString();
-  container.appendChild(content);
-
-  myLibrary = [];
+  content.textContent = displayBook[myLibrary.length - 1].toString();
+  selectContainer.appendChild(content);
 }
 
-// Save inputs as arguments for new Book constructor
-const submitButton = document.querySelector("#submitButton");
+// Assigns an array element data attribute
+function addDataValues() {
+  const selectCard = document.querySelectorAll(".content");
 
-submitButton.addEventListener("click", (e) => {
-  e.preventDefault();
+  let elementValue = 0;
 
+  selectCard.forEach((card) => {
+    elementValue += 1;
+    card.dataset.arrayElement = elementValue;
+  });
+}
+// Obtains values from the respective inputs and stores them as arguments in the new Book() object before creating a card display of the book
+addBookButton.addEventListener("click", (e) => {
   const bookTitle = document.querySelector("#bookTitle").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const isRead = document.querySelector("#isRead").value;
 
   const book = new Book(bookTitle, author, pages, isRead);
+
   addBookToLibrary(book);
-  loopThroughLibrary();
+  createCardDisplay();
+  addDataValues();
+  e.preventDefault();
 });
 
-// Coding for modal
+// Modal info
 const modal = document.querySelector(".modal");
-const addBookButton = document.querySelector(".modalButton");
+const newBookButton = document.querySelector(".modalButton");
 const closeModal = document.querySelector(".closeModal");
 
-addBookButton.addEventListener("click", () => {
+newBookButton.addEventListener("click", () => {
   modal.style.display = "block";
 });
 
