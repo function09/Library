@@ -35,8 +35,12 @@ function addDataValues() {
   let elementValue = 0;
 
   selectCard.forEach((card) => {
-    elementValue += 1;
-    card.dataset.arrayElement = elementValue;
+    if (elementValue === 0) {
+      card.dataset.arrayElement = "0";
+      elementValue += 1;
+    } else {
+      card.dataset.arrayElement = elementValue++;
+    }
   });
 }
 // Obtains values from the respective inputs and stores them as arguments in the new Book() object before creating a card display of the book
