@@ -1,15 +1,16 @@
 const addBookButton = document.querySelector("#addBookButton");
-
 let myLibrary = [];
+let id = 0;
 
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.isRead = isRead;
   this.info = function () {
-    return `${this.title} by ${this.author} ,${this.pages} ,${this.isRead}`;
+    return `${this.title} by ${this.author} ,${this.pages}`;
   };
+  this.id = `array-${id++}`;
+  this.isRead = false;
 }
 
 function addBookToLibrary(book) {
@@ -51,7 +52,7 @@ function assignId() {
   });
 }
 
-// Displays book info as a card with a remove book button
+// Displays book info as a card with a remove book button and checkbox to indicate if book has been read
 function createCardDisplay() {
   const displayBook = myLibrary.map((book) => book.info());
 
@@ -78,17 +79,28 @@ function createCardDisplay() {
       assignDataValues();
     }
   });
+  const addCheckbox = document.createElement("input");
+  addCheckbox.setAttribute("type", "checkbox");
+  addCheckbox.classList.add("checkbox");
+  content.appendChild(addCheckbox);
+
+  addCheckbox.addEventListener("click", () => {
+    const getContentIDNumber = parseFloat(content.id.replace("array-", ""));
+    if (addCheckbox.checked) {
+      myLibrary[getContentIDNumber].isRead = true;
+    } else {
+      myLibrary[getContentIDNumber].isRead = false;
+    }
+  });
 }
 
 // Obtains values from the respective inputs and stores them as arguments in the new Book() object before creating a card display of the book
 addBookButton.addEventListener("click", (e) => {
-  const bookTitle = document.querySelector("#bookTitle").value;
+  const title = document.querySelector("#bookTitle").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
-  const isRead = document.querySelector("#isRead").value;
 
-  const book = new Book(bookTitle, author, pages, isRead);
-
+  const book = new Book(title, author, pages);
   addBookToLibrary(book);
   createCardDisplay();
   assignId();
