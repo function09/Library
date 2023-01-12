@@ -17,6 +17,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
+// Library features
 const addBookButton = document.querySelector("#addBookButton");
 let myLibrary = [];
 let id = 0;
@@ -98,6 +99,7 @@ function createCardDisplay() {
       assignDataValues();
     }
   });
+
   const addCheckbox = document.createElement("input");
   addCheckbox.setAttribute("type", "checkbox");
   addCheckbox.classList.add("checkbox");

@@ -1,3 +1,45 @@
+*{
+    margin: 0;
+    padding: none;
+}
+
+/* Styling for content */
+.container{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas: 
+    "header"
+    "main";
+}
+
+.title {
+    justify-self: start ;
+    grid-area: header;
+    justify-self: start;
+    align-self: center;
+    font-size: 2em
+}
+
+.modalButton {
+    grid-area: header;
+    justify-self: end;
+    align-self: center;
+    height: 25px;
+    width: 100px;
+}
+
+.content {
+    height: 30vh;
+    width: 20vw;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red
+}
+
+/* Modal styling */
 .modal {
     display: none;
     position: fixed;
