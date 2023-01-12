@@ -79,6 +79,7 @@ function createCardDisplay() {
   const pages = document.querySelector("#pages").value;
 
   const book = new Book(title, author, pages);
+  addBookToLibrary(book);
 
   const selectContainer = document.querySelector(".cardContainer");
   const content = document.createElement("div");
@@ -136,7 +137,7 @@ function createCardDisplay() {
 // Obtains values from the respective inputs and stores them as arguments in the new Book() object before creating a card display of the book
 addBookButton.addEventListener("click", (e) => {
   const selectForm = document.querySelector("form");
-  addBookToLibrary();
+
   createCardDisplay();
   assignId();
   assignDataValues();
