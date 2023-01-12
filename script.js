@@ -27,7 +27,7 @@ function Book(title, author, pages) {
   this.author = author;
   this.pages = pages;
   this.info = function () {
-    return `${this.title} by ${this.author} ,${this.pages}`;
+    return `${this.title} by ${this.author} ,${this.pages} pages`;
   };
   this.id = `array-${id++}`;
   this.isRead = false;
@@ -74,13 +74,31 @@ function assignId() {
 
 // Displays book info as a card with a remove book button and checkbox to indicate if book has been read
 function createCardDisplay() {
-  const displayBook = myLibrary.map((book) => book.info());
+  const title = document.querySelector("#bookTitle").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+
+  const book = new Book(title, author, pages);
 
   const selectContainer = document.querySelector(".cardContainer");
   const content = document.createElement("div");
   content.classList.add("content");
-  content.textContent = displayBook[myLibrary.length - 1].toString();
   selectContainer.appendChild(content);
+
+  const bookTitle = document.createElement("div");
+  bookTitle.classList.add("title");
+  bookTitle.textContent = book.title;
+  content.appendChild(bookTitle);
+
+  const bookAuthor = document.createElement("div");
+  bookAuthor.classList.add("author");
+  bookAuthor.textContent = book.author;
+  content.appendChild(bookAuthor);
+
+  const bookPages = document.createElement("div");
+  bookPages.classList.add("pages");
+  bookPages.textContent = `${book.pages} pages`;
+  content.appendChild(bookPages);
 
   const removeBookButton = document.createElement("button");
   removeBookButton.textContent = "Remove book";
@@ -117,13 +135,8 @@ function createCardDisplay() {
 
 // Obtains values from the respective inputs and stores them as arguments in the new Book() object before creating a card display of the book
 addBookButton.addEventListener("click", (e) => {
-  const title = document.querySelector("#bookTitle").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
   const selectForm = document.querySelector("form");
-
-  const book = new Book(title, author, pages);
-  addBookToLibrary(book);
+  addBookToLibrary();
   createCardDisplay();
   assignId();
   assignDataValues();

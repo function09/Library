@@ -14,7 +14,7 @@
     "main";
 }
 
-.title {
+.header{
     justify-self: start ;
     grid-area: header;
     justify-self: start;
