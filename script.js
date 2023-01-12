@@ -1,3 +1,22 @@
+// Modal info
+const modal = document.querySelector(".modal");
+const newBookButton = document.querySelector(".modalButton");
+const closeModal = document.querySelector(".closeModal");
+
+newBookButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+closeModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 const addBookButton = document.querySelector("#addBookButton");
 let myLibrary = [];
 let id = 0;
@@ -99,30 +118,14 @@ addBookButton.addEventListener("click", (e) => {
   const title = document.querySelector("#bookTitle").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
+  const selectForm = document.querySelector("form");
 
   const book = new Book(title, author, pages);
   addBookToLibrary(book);
   createCardDisplay();
   assignId();
   assignDataValues();
-  e.preventDefault();
-});
-
-// Modal info
-const modal = document.querySelector(".modal");
-const newBookButton = document.querySelector(".modalButton");
-const closeModal = document.querySelector(".closeModal");
-
-newBookButton.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
-closeModal.addEventListener("click", () => {
+  selectForm.reset();
   modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
+  e.preventDefault();
 });
