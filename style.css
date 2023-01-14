@@ -131,11 +131,13 @@ body {
 
 .closeModal:hover, 
 .closeModal:focus {
-    color: black;
+    color: #27272a;
     text-decoration: none;
     cursor: pointer;
 }
 
+
+/* Buttons and forms */
 button {
     border-radius: 10px;
     border-style: none;

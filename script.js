@@ -19,16 +19,13 @@ window.addEventListener("click", (e) => {
 
 // Library features
 const addBookButton = document.querySelector("#addBookButton");
-let myLibrary = [];
+const myLibrary = [];
 let id = 0;
 
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = `${pages} pages`;
-  this.info = function () {
-    return `${this.title} by ${this.author} ,${this.pages}`;
-  };
   this.id = `array-${id++}`;
   this.isRead = false;
 }
@@ -47,8 +44,8 @@ function assignDataValues() {
     if (arrayValue === 0 || indexValue === 0) {
       button.dataset.value = "array-0";
       button.dataset.index = 0;
-      arrayValue += 1;
-      indexValue += 1;
+      arrayValue++;
+      indexValue++;
     } else {
       button.dataset.value = `array-${arrayValue++}`;
       button.dataset.index = indexValue++;
@@ -65,7 +62,7 @@ function assignId() {
   selectContent.forEach((content) => {
     if (elementValue === 0) {
       content.setAttribute("id", `array-${elementValue}`);
-      elementValue += 1;
+      elementValue++;
     } else {
       content.setAttribute("id", `array-${elementValue++}`);
     }
