@@ -25,9 +25,9 @@ let id = 0;
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
-  this.pages = pages;
+  this.pages = `${pages} pages`;
   this.info = function () {
-    return `${this.title} by ${this.author} ,${this.pages} pages`;
+    return `${this.title} by ${this.author} ,${this.pages}`;
   };
   this.id = `array-${id++}`;
   this.isRead = false;
@@ -72,7 +72,7 @@ function assignId() {
   });
 }
 
-// Displays book info as a card with a remove book button and checkbox to indicate if book has been read
+// Displays book info as a card with a remove book button and book read button to indicate if book has been read
 function createCardDisplay() {
   const title = document.querySelector("#bookTitle").value;
   const author = document.querySelector("#author").value;
@@ -98,8 +98,25 @@ function createCardDisplay() {
 
   const bookPages = document.createElement("div");
   bookPages.classList.add("pages");
-  bookPages.textContent = `${book.pages} pages`;
+  bookPages.textContent = book.pages;
   content.appendChild(bookPages);
+
+  const bookReadButton = document.createElement("button");
+  bookReadButton.classList.add("bookReadButton");
+  bookReadButton.textContent = "Book read?";
+  content.appendChild(bookReadButton);
+
+  bookReadButton.addEventListener("click", () => {
+    const getContentIDNumber = parseFloat(content.id.replace("array-", ""));
+    myLibrary[getContentIDNumber].isRead = true;
+    content.style.border = "5px solid #22c55e";
+    bookReadButton.remove();
+
+    const bookIsRead = document.createElement("div");
+    bookIsRead.textContent = "Book read ✓";
+    bookIsRead.classList.add("bookIsRead");
+    content.appendChild(bookIsRead);
+  });
 
   const removeBookButton = document.createElement("button");
   removeBookButton.textContent = "Remove book";
@@ -116,20 +133,6 @@ function createCardDisplay() {
       myLibrary.splice(selectIndex, 1);
       assignId();
       assignDataValues();
-    }
-  });
-
-  const addCheckbox = document.createElement("input");
-  addCheckbox.setAttribute("type", "checkbox");
-  addCheckbox.classList.add("checkbox");
-  content.appendChild(addCheckbox);
-
-  addCheckbox.addEventListener("click", () => {
-    const getContentIDNumber = parseFloat(content.id.replace("array-", ""));
-    if (addCheckbox.checked) {
-      myLibrary[getContentIDNumber].isRead = true;
-    } else {
-      myLibrary[getContentIDNumber].isRead = false;
     }
   });
 }

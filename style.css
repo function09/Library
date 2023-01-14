@@ -79,6 +79,15 @@ body {
     width: 100px;
 }
 
+.bookReadButton {
+    height: 25px;
+    width: 100px;
+}
+
+.bookIsRead {
+    color: #22c55e;
+}
+
 .modalButton {
     display:flex;
     justify-content: center;
@@ -139,6 +148,10 @@ button:hover {
     cursor: pointer;
     background-color: #27272a;
     color: #e5e7eb;
+}
+
+button:active {
+    transform: translateY(4px)
 }
 
 form {
