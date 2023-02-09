@@ -22,12 +22,14 @@ const addBookButton = document.querySelector("#addBookButton");
 const myLibrary = [];
 let id = 0;
 
-function Book(title, author, pages) {
-  this.title = title;
-  this.author = author;
-  this.pages = `${pages} pages`;
-  this.id = `array-${id++}`;
-  this.isRead = false;
+class Book {
+  constructor(title, author, pages) {
+    this.title = title;
+    this.author = author;
+    this.pages = `${pages} pages`;
+    this.id = `array-${id++}`;
+    this.isRead = false;
+  }
 }
 
 function addBookToLibrary(book) {
